@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <title>EnerTalk Card SDK Sample</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.20/webcomponents-lite.min.js"></script>
+        <script src="https://enertalk-card.encoredtech.com/sdk.js"></script>
+    </head>
+    <body unresolved style="margin:0">
+
+        <div id="my-card"></div>
+
+    </body>
+    <script>
+
+        var UI = new Encored.UI({
+          env: 'production',
+          category: 'home',
+          iframe: false,
+          version: 2
+        });
+
+        function renderCard(accessToken, cards) {
+          var token = accessToken || '',
+          target = document.querySelector('#my-card'),
+          parsedCards;
+
+          try {
+              parsedCards = JSON.parse(cards);
+          } catch(e) {
+              throw new Error(e);
+          }
+
+          UI.renderCard({
+            cards: parsedCards,
+            accessToken: token,
+            target: target
+          });
+        }
+
+        function removeCard() {
+          var target = document.querySelector('#my-card');
+          target.innerHTML = '';
+        }
+
+    </script>
+</html>

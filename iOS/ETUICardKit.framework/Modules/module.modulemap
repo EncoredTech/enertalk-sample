@@ -1,0 +1,10 @@
+framework module ETUICardKit {
+  umbrella header "ETUICardKit.h"
+
+  export *
+  module * { export * }
+}
+
+module ETUICardKit.Swift {
+    header "ETUICardKit-Swift.h"
+}

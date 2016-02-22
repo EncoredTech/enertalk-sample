@@ -1,0 +1,10 @@
+framework module ETPublicAPIKit {
+  umbrella header "ETPublicAPIKit.h"
+
+  export *
+  module * { export * }
+}
+
+module ETPublicAPIKit.Swift {
+    header "ETPublicAPIKit-Swift.h"
+}

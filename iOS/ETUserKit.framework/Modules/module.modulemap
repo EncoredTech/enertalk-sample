@@ -1,0 +1,10 @@
+framework module ETUserKit {
+  umbrella header "ETUserKit.h"
+
+  export *
+  module * { export * }
+}
+
+module ETUserKit.Swift {
+    header "ETUserKit-Swift.h"
+}

@@ -15,13 +15,13 @@ extension UserManager {
     
     struct Constants {
         // Your Client ID
-        static let clientId = "eW9uZ2RhbXNoQGVuY29yZWR0ZWNoLmNvbV9FbmVyVGFsa0hPTUVTdGFydGVyS2l0"
+        static let clientId = ""
         
         // Your Client Secret
-        static let clientSecret = "ic1ow4gn5145wy9as4f67az9iy8w74mw7ub0695"
+        static let clientSecret = ""
         
         // Your Client Redirect URI
-        static let redirectURI = "https://enertalk-home-starterkit.com/callback"
+        static let redirectURI = ""
     }
 
 }

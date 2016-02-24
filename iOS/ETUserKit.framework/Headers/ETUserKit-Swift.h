@@ -98,7 +98,7 @@ SWIFT_CLASS("_TtC9ETUserKit13ETUserManager")
 - (nonnull instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret redirectURI:(NSString * __nonnull)redirectURI;
 - (void)login:(UIViewController * __nonnull)fromController loginCompletionHandler:(void (^ __nonnull)(BOOL, NSDictionary<NSString *, id> * __nullable))loginCompletionHandler;
 - (void)logout:(void (^ __nonnull)(void))completionHandler;
-- (NSString * __nullable)getAccessToken;
+- (void)getAccessToken:(void (^ __nonnull)(NSString * __nullable))completion;
 @end
 
 #pragma clang diagnostic pop

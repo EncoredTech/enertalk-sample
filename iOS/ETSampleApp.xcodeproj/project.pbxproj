@@ -13,10 +13,10 @@
 		4A185FC51C76ED90005B5301 /* UICardRenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A185FC41C76ED90005B5301 /* UICardRenderViewController.swift */; };
 		4A43B95C1C7DF3540010F8ED /* ETPublicAPIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B9591C7DF3540010F8ED /* ETPublicAPIKit.framework */; };
 		4A43B95D1C7DF3540010F8ED /* ETPublicAPIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B9591C7DF3540010F8ED /* ETPublicAPIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4A43B95E1C7DF3540010F8ED /* ETUICardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B95A1C7DF3540010F8ED /* ETUICardKit.framework */; };
-		4A43B95F1C7DF3540010F8ED /* ETUICardKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B95A1C7DF3540010F8ED /* ETUICardKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A43B9601C7DF3540010F8ED /* ETUserKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B95B1C7DF3540010F8ED /* ETUserKit.framework */; };
 		4A43B9611C7DF3540010F8ED /* ETUserKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A43B95B1C7DF3540010F8ED /* ETUserKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4A5C121F1C7F4FF900335521 /* ETUICardKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5C121E1C7F4FF900335521 /* ETUICardKit.framework */; };
+		4A5C12201C7F4FF900335521 /* ETUICardKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5C121E1C7F4FF900335521 /* ETUICardKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A6AE5EE1C539F89009DD7AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AE5ED1C539F89009DD7AB /* AppDelegate.swift */; };
 		4A6AE5F01C539F89009DD7AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AE5EF1C539F89009DD7AB /* LoginViewController.swift */; };
 		4A6AE5F31C539F89009DD7AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AE5F11C539F89009DD7AB /* Main.storyboard */; };
@@ -50,7 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4A43B95F1C7DF3540010F8ED /* ETUICardKit.framework in Embed Frameworks */,
+				4A5C12201C7F4FF900335521 /* ETUICardKit.framework in Embed Frameworks */,
 				4A43B95D1C7DF3540010F8ED /* ETPublicAPIKit.framework in Embed Frameworks */,
 				4A43B9611C7DF3540010F8ED /* ETUserKit.framework in Embed Frameworks */,
 			);
@@ -65,8 +65,8 @@
 		4A185FC21C768256005B5301 /* UICardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICardCollectionViewCell.swift; sourceTree = "<group>"; };
 		4A185FC41C76ED90005B5301 /* UICardRenderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICardRenderViewController.swift; sourceTree = "<group>"; };
 		4A43B9591C7DF3540010F8ED /* ETPublicAPIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETPublicAPIKit.framework; sourceTree = "<group>"; };
-		4A43B95A1C7DF3540010F8ED /* ETUICardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETUICardKit.framework; sourceTree = "<group>"; };
 		4A43B95B1C7DF3540010F8ED /* ETUserKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETUserKit.framework; sourceTree = "<group>"; };
+		4A5C121E1C7F4FF900335521 /* ETUICardKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ETUICardKit.framework; sourceTree = "<group>"; };
 		4A6AE5EA1C539F89009DD7AB /* ETSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ETSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6AE5ED1C539F89009DD7AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A6AE5EF1C539F89009DD7AB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A43B95E1C7DF3540010F8ED /* ETUICardKit.framework in Frameworks */,
+				4A5C121F1C7F4FF900335521 /* ETUICardKit.framework in Frameworks */,
 				4A43B95C1C7DF3540010F8ED /* ETPublicAPIKit.framework in Frameworks */,
 				4A43B9601C7DF3540010F8ED /* ETUserKit.framework in Frameworks */,
 			);
@@ -111,8 +111,8 @@
 		4A6AE5E11C539F89009DD7AB = {
 			isa = PBXGroup;
 			children = (
+				4A5C121E1C7F4FF900335521 /* ETUICardKit.framework */,
 				4A43B9591C7DF3540010F8ED /* ETPublicAPIKit.framework */,
-				4A43B95A1C7DF3540010F8ED /* ETUICardKit.framework */,
 				4A43B95B1C7DF3540010F8ED /* ETUserKit.framework */,
 				4A6AE5EC1C539F89009DD7AB /* ETSampleApp */,
 				4A6AE6011C539F89009DD7AB /* ETSampleAppTests */,

@@ -285,18 +285,40 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-tW-9AR">
                                             <rect key="frame" x="5" y="5" width="118" height="109"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOm-Dh-l0O">
+                                            <rect key="frame" x="5" y="93.5" width="118" height="20.5"/>
+                                            <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="lOm-Dh-l0O" secondAttribute="bottom" constant="-5" id="8GO-Cm-HUF"/>
                                     <constraint firstItem="CR6-tW-9AR" firstAttribute="top" secondItem="5OM-dO-Wo8" secondAttribute="top" constant="5" id="I0g-c8-HtG"/>
                                     <constraint firstAttribute="bottom" secondItem="CR6-tW-9AR" secondAttribute="bottom" constant="5" id="K5d-Mt-Hfr"/>
                                     <constraint firstAttribute="trailing" secondItem="CR6-tW-9AR" secondAttribute="trailing" constant="5" id="U5a-DA-e9a"/>
                                     <constraint firstItem="CR6-tW-9AR" firstAttribute="leading" secondItem="5OM-dO-Wo8" secondAttribute="leading" constant="5" id="aVd-xx-ocF"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="lOm-Dh-l0O" secondAttribute="trailing" constant="-3" id="eJz-w0-she"/>
+                                    <constraint firstItem="lOm-Dh-l0O" firstAttribute="leading" secondItem="5OM-dO-Wo8" secondAttribute="leadingMargin" constant="-3" id="taj-nc-Tjb"/>
+                                    <constraint firstItem="lOm-Dh-l0O" firstAttribute="leading" secondItem="5OM-dO-Wo8" secondAttribute="leadingMargin" constant="-5" id="wIR-0o-PVf"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="lOm-Dh-l0O" secondAttribute="bottom" constant="-3" id="xa7-nX-0Ee"/>
+                                    <constraint firstItem="lOm-Dh-l0O" firstAttribute="trailing" secondItem="5OM-dO-Wo8" secondAttribute="trailingMargin" constant="-5" id="ymU-36-ckp"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8GO-Cm-HUF"/>
+                                        <exclude reference="wIR-0o-PVf"/>
+                                        <exclude reference="ymU-36-ckp"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="cardImageView" destination="CR6-tW-9AR" id="LMT-xa-qeT"/>
+                                    <outlet property="cardNameLabel" destination="lOm-Dh-l0O" id="N5k-f9-knA"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

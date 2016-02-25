@@ -40,7 +40,9 @@ class PublicAPIPrepareViewController: UIViewController {
     
     func responseHandler(success: Bool, result: AnyObject?) -> Void {
         
-        sendRequestButton.enabled = true
+        dispatch_async(dispatch_get_main_queue(), {
+            self.sendRequestButton.enabled = true
+        })
         
         guard success else {
             

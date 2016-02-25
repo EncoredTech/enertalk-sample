@@ -19,15 +19,19 @@ class LoginViewController: UIViewController {
     // MARK: Life cycles
     
     override func viewDidAppear(animated: Bool) {
-        if let token = userManager.getAccessToken() {
-            print("access token before login: \(token)")
-            
-            // TODO: If has not expired access token, go to main
-            initializePublicAPIManager(token)
-            initializeUICardManager(token)
-            
-            goToMain()
+        
+        userManager.getAccessToken() { (accessToken) in
+            if let token = accessToken {
+                print("access token before login: \(token)")
+                self.initializePublicAPIManager(token)
+                self.initializeUICardManager(token)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.goToMain()
+                })
+            }
         }
+
     }
 
     
@@ -48,15 +52,17 @@ class LoginViewController: UIViewController {
                 
             }
             
-            if let token = self.userManager.getAccessToken() {
-                print("access token after login: \(token)")
-                self.initializePublicAPIManager(token)
-                self.initializeUICardManager(token)
+            self.userManager.getAccessToken() { (accessToken) in
+                if let token = accessToken {
+                    print("access token after login: \(token)")
+                    self.initializePublicAPIManager(token)
+                    self.initializeUICardManager(token)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.goToMain()
+                    })
+                }
             }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.goToMain()
-            })
 
         }
     }

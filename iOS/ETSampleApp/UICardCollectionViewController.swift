@@ -22,15 +22,15 @@ class UICardCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load Public API List
-        loadUICards()
-        
         // Set column width
         let width = CGRectGetWidth(collectionView!.frame) / 2
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
+        
+        // Load Public API List
+        loadUICards()
     }
     
     

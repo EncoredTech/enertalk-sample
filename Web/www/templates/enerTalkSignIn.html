@@ -1,0 +1,19 @@
+<!-- Sign-in page-->
+
+<ion-view ng-controller="EnerTalkSignInCtrl" title="EnerTalk Sign-in">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="spacer" style="height: 40px;"/>
+        
+        <!-- Sign-in button -->
+        <div class="padding">
+            <button ng-click="login()" class="button button-block button-light">
+                Sign In
+            </button>
+        </div>
+        
+        <!-- Login error message -->
+        <div class="padding" id="sign-in-error-message">
+            <p style="color:red">Access denied. Please try again.</p>
+        </div>
+    </ion-content>
+</ion-view>   

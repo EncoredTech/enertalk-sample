@@ -1,0 +1,21 @@
+<!-- Modal for Card view -->
+
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">{{modalData.cardName}}</h1>
+    </ion-header-bar>
+    
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <!-- Card display area -->
+        <div id="my-card"></div>
+                    
+        <div class="spacer" style="height: 40px;"/>
+        
+        <!-- Close button for the modal -->
+        <div class="padding">
+            <button ng-click="modalCtrl.hide()" class="button button-block button-light">
+                Close
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>

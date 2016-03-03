@@ -1,0 +1,20 @@
+<!-- Card tab page-->
+
+<ion-view ng-controller="CardCtrl" title="EnerTalk Card UI">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+            
+        <ion-list class="list list-inset">
+            <ion-item ng-repeat="card in cardList" class="item item-thumbnail-left"
+                ng-click="openModal(card.id, card.name)">
+                
+                <img ng-src="{{card.thumbnailUrl}}">
+                {{card.name}}
+                <span class="item-text-wrap">
+                    <p style="color:#a6a6a6">{{card.desc}}</p>
+                </span>
+                
+            </ion-item>
+        </ion-list>
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DevSample</string>
+    <string name="signIn">Sign In</string>
+    <string name="home_title">Development Sample</string>
+    <string name="tab1">Card</string>
+    <string name="tab2">API</string>
+</resources>

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Request Device Forecast Usage",
+    "id": "/devices/:deviceId/forecastUsage",
+    "desc": "검침일을 기준으로 이번 달 예측 사용량을 얻는다."
+  },
+  {
+    "name": "Request Device Information",
+    "id": "/devices/:deviceId",
+    "desc": "해당 디바이스의 정보를 얻는다"
+  },
+  {
+    "name": "Request Device Metering Usage",
+    "id": "/devices/:deviceId/meteringUsage",
+    "desc": "사이트의 검침일로부터 요청 시각까지의 누적 사용량을 얻는다."
+  },
+  {
+    "name": "Request Device Metering Usages",
+    "id": "/devices/:deviceId/meteringUsages",
+    "desc": "사이트의 검침일로부터 특정 기간의 검침 사용량을 얻는다."
+  },
+  {
+    "name": "Request Device Periodic Usages",
+    "id": "/devices/:deviceId/usages",
+    "desc": "디바이스의 지정된 기간 동안의 15min/hourly/daily/monthly 전력 사용량을 조회한다"
+  },
+  {
+    "name": "Request Realtime Usage",
+    "id": "/devices/:deviceId/realtimeUsage",
+    "desc": "요청 시점의 디바이스 실시간 사용량 정보를 조회한다"
+  }
+]

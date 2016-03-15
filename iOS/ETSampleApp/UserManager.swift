@@ -16,6 +16,9 @@ class UserManager: NSObject {
     }
     
     class func sharedInstance() -> ETUserManager {
-        return Singleton.sharedInstance
+        guard let instance = Singleton.sharedInstance else {
+            fatalError("clientId, clientSecret, redirectURI must be required. You can make apps at http://developer.encoredtech.com/")
+        }
+        return instance
     }
 }

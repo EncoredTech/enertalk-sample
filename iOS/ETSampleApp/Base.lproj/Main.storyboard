@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -64,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bjE-QU-uKu" id="nIP-hJ-0fW">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cv6-jk-LbG">
@@ -219,18 +219,18 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QoD-dM-z8L" id="gNQ-SS-2vd">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Nb-0g-KBt">
-                                                    <rect key="frame" x="15" y="12" width="32" height="20"/>
+                                                    <rect key="frame" x="15" y="12" width="31.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qaj-H3-sjD">
-                                                    <rect key="frame" x="543" y="12" width="42" height="20"/>
+                                                    <rect key="frame" x="543.5" y="12" width="41.5" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -377,8 +377,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-oB-b0x">
+                                <rect key="frame" x="0.0" y="205" width="600" height="346"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AV3-bA-dZh">
+                                <rect key="frame" x="20" y="89" width="87" height="29"/>
+                                <segments>
+                                    <segment title="Watt"/>
+                                    <segment title="Bill"/>
+                                </segments>
+                                <connections>
+                                    <action selector="displayUnitChanged:" destination="h6R-a5-uvC" eventType="valueChanged" id="Wmg-mS-p2C"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lHA-0G-EiF">
+                                <rect key="frame" x="404" y="89" width="176" height="29"/>
+                                <segments>
+                                    <segment title="한국어"/>
+                                    <segment title="English"/>
+                                    <segment title="日本語"/>
+                                </segments>
+                                <connections>
+                                    <action selector="languageChanged:" destination="h6R-a5-uvC" eventType="valueChanged" id="LA9-Yg-4uq"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYv-M3-571">
-                                <rect key="frame" x="233" y="99" width="135" height="36"/>
+                                <rect key="frame" x="233" y="146" width="135" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="RENDER CARD"/>
                                 <connections>
@@ -386,23 +411,25 @@
                                     <action selector="sendRequestButtonTouched:" destination="MFn-4a-nBK" eventType="touchUpInside" id="Vrj-jp-Khl"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-oB-b0x">
-                                <rect key="frame" x="0.0" y="165" width="600" height="386"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YYv-M3-571" firstAttribute="top" secondItem="52g-Ns-rSI" secondAttribute="bottom" constant="35" id="EFz-me-jGL"/>
+                            <constraint firstItem="BfT-oB-b0x" firstAttribute="top" secondItem="YYv-M3-571" secondAttribute="bottom" constant="23" id="M9g-gp-3Od"/>
+                            <constraint firstItem="YYv-M3-571" firstAttribute="top" secondItem="lHA-0G-EiF" secondAttribute="bottom" constant="29" id="PgT-bq-Jk4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="AV3-bA-dZh" secondAttribute="leading" id="U8S-Md-rge"/>
                             <constraint firstItem="YYv-M3-571" firstAttribute="centerX" secondItem="Wxc-jK-Y8N" secondAttribute="centerX" id="UPU-Eh-3Nc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lHA-0G-EiF" secondAttribute="trailing" id="WeT-ee-srO"/>
                             <constraint firstItem="BfT-oB-b0x" firstAttribute="leading" secondItem="Wxc-jK-Y8N" secondAttribute="leading" id="aS6-EQ-nb9"/>
-                            <constraint firstItem="BfT-oB-b0x" firstAttribute="top" secondItem="YYv-M3-571" secondAttribute="bottom" constant="30" id="d5W-pP-O3L"/>
                             <constraint firstItem="Njn-C7-nyu" firstAttribute="top" secondItem="BfT-oB-b0x" secondAttribute="bottom" id="ijK-y5-tFE"/>
+                            <constraint firstItem="AV3-bA-dZh" firstAttribute="top" secondItem="52g-Ns-rSI" secondAttribute="bottom" constant="25" id="oF5-48-JH5"/>
                             <constraint firstAttribute="trailing" secondItem="BfT-oB-b0x" secondAttribute="trailing" id="oQH-Ti-FUs"/>
+                            <constraint firstItem="lHA-0G-EiF" firstAttribute="top" secondItem="52g-Ns-rSI" secondAttribute="bottom" constant="25" id="yrj-4K-5G0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cardContainerView" destination="BfT-oB-b0x" id="fqv-bI-8ax"/>
+                        <outlet property="displayUnitSelector" destination="AV3-bA-dZh" id="zzJ-89-ohA"/>
+                        <outlet property="languageSelector" destination="lHA-0G-EiF" id="Mdd-6N-iuI"/>
                         <outlet property="renderCardButton" destination="YYv-M3-571" id="Gkq-07-Upf"/>
                     </connections>
                 </viewController>

@@ -16,6 +16,9 @@ class UICardRenderViewController: UIViewController {
     let cardManager = UICardManager.sharedInstance()!
     var card: ETUICard?
     
+    @IBOutlet weak var displayUnitSelector: UISegmentedControl!
+    @IBOutlet weak var languageSelector: UISegmentedControl!
+    
     @IBOutlet weak var renderCardButton: UIButton!
     @IBOutlet weak var cardContainerView: UIView!
     
@@ -37,6 +40,8 @@ class UICardRenderViewController: UIViewController {
         
         cardManager.render(cardContainerView, cards: [card]) { (success, result) -> Void in
             
+            self.renderCardButton.enabled = true
+            
             guard success else {
                 if let error = result as? String {
                     print(error)
@@ -44,14 +49,32 @@ class UICardRenderViewController: UIViewController {
                     print("unknown error")
                 }
                 
-                self.renderCardButton.enabled = true
-                
                 return
             }
             
             print("card rendered successfully")
             
         }
+    }
+    
+    
+    @IBAction func displayUnitChanged(sender: UISegmentedControl) {
+        
+        let displayUnitLabels = ["watt", "bill"]
+        let selectedIndex = sender.selectedSegmentIndex
+        let selectedDisplayUnitLabel = displayUnitLabels[selectedIndex]
+        
+        self.card?.parameters?["displayUnit"] = selectedDisplayUnitLabel
+    }
+    
+    
+    @IBAction func languageChanged(sender: UISegmentedControl) {
+        
+        let languageLabels = ["ko", "en", "ja"]
+        let selectedIndex = sender.selectedSegmentIndex
+        let selectedLanguageLabel = languageLabels[selectedIndex]
+        
+        self.card?.parameters?["lang"] = selectedLanguageLabel
     }
 }
 

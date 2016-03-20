@@ -95,7 +95,7 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC9ETUserKit13ETUserManager")
 @interface ETUserManager : NSObject
-- (nonnull instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret redirectURI:(NSString * __nonnull)redirectURI;
+- (nullable instancetype)initWithClientId:(NSString * __nullable)clientId clientSecret:(NSString * __nullable)clientSecret redirectURI:(NSString * __nullable)redirectURI;
 - (void)login:(UIViewController * __nonnull)fromController loginCompletionHandler:(void (^ __nonnull)(BOOL, NSDictionary<NSString *, id> * __nullable))loginCompletionHandler;
 - (void)logout:(void (^ __nonnull)(void))completionHandler;
 - (void)getAccessToken:(void (^ __nonnull)(NSString * __nullable))completion;

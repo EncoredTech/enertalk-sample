@@ -4,8 +4,9 @@ package com.encoredtech.devsample.vo;
  * Created by koansang on 2016. 2. 15..
  */
 public class AuthInfoVo {
-    String client_id = "S29hbnNhbmdAZW5jb3JlZHRlY2guY29tX0RldiBTYW1wbGUgQXBw";
-    String client_serect = "7c11740u5nd5fu5zb47620f1p56ek6so9xy3368";
+    // TODO: fill in your client id and secret
+    String client_id = "";
+    String client_serect = "";
     String response_type = "code";
     String redirect_uri = "http://localhost/callback";
     String app_version = "web";

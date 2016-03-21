@@ -4,8 +4,10 @@ angular.module('app.controllers', [])
 /// <summary> 
 /// Controller for Enertalk API tab
 /// </summary>  
-.controller('ApiCtrl', function($scope, $http, $ionicPopup) 
+.controller('ApiCtrl', function($scope, $http, $ionicPopup, TokenFactory) 
 {
+    var deviceId;
+    
     $scope.apiList =
     [
         {name: 'realtimeUsage', description: 'Request device usage of current time'},
@@ -14,40 +16,63 @@ angular.module('app.controllers', [])
         {name: 'deviceInfo', description: 'Request information of a device'}
     ];
 
-    /// Show API result for given apiName 
-    $scope.showApiResult = function(apiName) 
-    {
-        console.log('showApiResult() invoked')
-        
-        // Get device id
-        retrieveDeviceId(function(deviceIdResult)
+    /**
+     * Handle API result for given apiName
+     * @param {String} apiName api name to be accessed
+     */ 
+    $scope.handleApiRequest = function(apiName) 
+    { 
+        // Get device id before sending API request
+        retrieveDeviceId(function()
         {
-            console.log('deviceId ' + deviceIdResult);
-            
-            // Send API request with retrieved device id
-            sendApiRequest(apiName, deviceIdResult, function(apiResult) 
-            {
-                var resultString = '';
-                for (var param in apiResult)
-                {
-                    resultString += param + ' ' + apiResult[param] + '<br />';
-                }
-                
-                // Show result
-                var alertPopup = 
-                {
-                    title: apiName,
-                    template: resultString
-                };
-                
-                $ionicPopup.alert(alertPopup);
-            });
+            sendApiRequest(apiName, showApiResult);
         });
     }
     
-    /// Send API request with given device id and invoke callback with response data
-    var sendApiRequest = function(apiName, deviceId, callback)
+    /**
+     * Show API request result to user
+     * @param {String} apiName API name to be displayed
+     * @param {String} apiResult API result to be displayed
+     */
+    function showApiResult(apiName, apiResult)
     {
+        console.log("showApiResult");
+        
+        if (!apiResult)
+        {
+            // Stop processing if failed to get the result from API request
+            return;
+        }
+        
+        var resultString = '';
+        for (var param in apiResult)
+        {
+            resultString += param + ' ' + apiResult[param] + '<br />';
+        }
+        
+        // Show result
+        var alertPopup = 
+        {
+            title: apiName,
+            template: resultString
+        };
+        
+        $ionicPopup.alert(alertPopup);
+    }
+ 
+    /**
+     * Send API request with given device id and invoke callback method with response data
+     * @param {String} apiName api name to be invoked
+     * @callback {showApiResult} cb callback method to be invoked upon completion
+     */
+    var sendApiRequest = function(apiName, cb)
+    {
+        if (!deviceId)
+        {
+            console.error("[sendApiRequest] Device ID is not available");
+            return;
+        }
+        
         var apiUrl = "https://api.encoredtech.com:8082/1.2/devices/" + deviceId;
         
         // Append api name to the url for APIs other than deviceInfo
@@ -61,27 +86,35 @@ angular.module('app.controllers', [])
         {
             method: "GET",
             url: apiUrl,
-            headers: getHeader()
+            headers: TokenFactory.data.header,
         };
 
         $http(httpConfig)
             .then(function sucessfullCallback(response) 
             {
                 console.log("[apiRequestResult] success");
-                console.log(response);
                 
-                callback(response.data)
+                cb(apiName, response.data)
             }, function errorCallback(response)
             {
-                console.log("[apiRequestResult] fail");
-                
-                callback(response.status + ' ' + response.message)
+                console.error("[apiRequestResult] fail: " +
+                    response.status + ' ' + response.message);
             });
     }
     
-    /// Get device id
-    var retrieveDeviceId = function(callback)
+    /**
+     * Retrieve device ID
+     * @callback {sendApiRequest} cb callback method to be invoked upon getting device id
+     */
+    var retrieveDeviceId = function(cb)
     {
+        // Use existing device id if available 
+        if (deviceId)
+        {
+            cb();
+            return;
+        }
+        
         var deviceUuidUrl = "https://enertalk-auth.encoredtech.com/uuid";
         
         // Get access token from built query
@@ -89,21 +122,22 @@ angular.module('app.controllers', [])
         {
             method: "GET",
             url: deviceUuidUrl,
-            headers: getHeader()
+            headers: TokenFactory.data.header
         };
 
         $http(httpConfig)
             .then(function sucessfullCallback(response) 
             {
-                console.log("[retrieveDeviceId] success");
-                console.log(response.data.uuid);
-                
-                callback(response.data.uuid);
+                deviceId = response.data.uuid;                
+                console.log("[retrieveDeviceId] success: " + deviceId);
+
+                cb();
             }, function errorCallback(response)
             {
-                console.log("[retrieveDeviceId] fail");
+                console.log("[retrieveDeviceId] fail: " +
+                    response.status + ' ' + response.message);
                 
-                callback(response.status + ' ' + response.message)
+                cb();
             });
     }
 })
@@ -111,7 +145,7 @@ angular.module('app.controllers', [])
 /// <summary> 
 /// Controller for Enertalk Card tab
 /// </summary>   
-.controller('CardCtrl', function($scope, $http, $ionicModal)
+.controller('CardCtrl', function($scope, $http, $ionicModal, TokenFactory)
 {
     $scope.cardList;
     $scope.modalData = 
@@ -120,7 +154,9 @@ angular.module('app.controllers', [])
         cardName: ''
     }
     
-    // Load modal view for card control
+    /**
+     * Load modal view for card control
+     */
     $ionicModal.fromTemplateUrl('templates/modal-cardView.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -128,7 +164,11 @@ angular.module('app.controllers', [])
         $scope.modalCtrl = modal;
     });
     
-    /// Open card view modal
+    /**
+     * Open modal for given card
+     * @param {String} selectedCardId card id to be displayed
+     * @param {String} selectedCardName card name to be displayed
+     */
     $scope.openModal = function(selectedCardId, selectedCardName)
     {
         $scope.modalData = 
@@ -140,24 +180,27 @@ angular.module('app.controllers', [])
         $scope.modalCtrl.show();
     };
 
-    /// Handle on modal destroyed event to clean it up
+    /**
+     * Handle on modal destroyed event to clean it up
+     */
     $scope.$on('$destroy', function() {
         $scope.modalCtrl.remove();
     });
     
-    /// Handle on ionic view loaded event
+    /**
+     * Handle on ionic view loaded event
+     */
     $scope.$on('$ionicView.loaded', function()
     {
         console.log('[ionicview loaded invoked]');
         
         // Load card list
-        loadCardList(function()
-        {
-            console.log('loadCardList completed');
-        });
+        loadCardList();
     });
     
-    /// Handle on modal shown event
+    /**
+     * Handle on ionic view loaded event
+     */
     $scope.$on('modal.shown', function()
     {
         console.log("[modal.shown] event fired")
@@ -165,7 +208,9 @@ angular.module('app.controllers', [])
         renderCard();
     });
     
-    /// Render card for selected card
+    /**
+     * Render card for selected card
+     */
     var renderCard = function()
     {   
         console.log("[renderCard] " + $scope.modalData.cardId);
@@ -175,7 +220,6 @@ angular.module('app.controllers', [])
         [{
             id: $scope.modalData.cardId
         }];
-        
 
         var UI = new Encored.UI({
             env: 'production',
@@ -186,17 +230,19 @@ angular.module('app.controllers', [])
 
         UI.renderCard({
             cards: cardParam,
-            accessToken: accessToken,
+            accessToken: TokenFactory.data.accessToken,
             target: target
         });
     }
-    
-    /// Load all card list
-    var loadCardList = function(callback)
+     
+    /**
+     * Load all card list
+     */
+    function loadCardList()
     {
         console.log('[loadCardList method invoked]');
         
-        // Do nothing if cardList is already loaded
+        // Do nothing if cardList has been already loaded
         if ($scope.cardList)
         {
             return;
@@ -205,8 +251,8 @@ angular.module('app.controllers', [])
         // Build config for http query
         var cardListUrl = "https://enertalk-card.encoredtech.com/cards";
         
-        // NOTE: do not send header on purpose since we want to load all card list
-        // regardless of the specific user
+        // NOTE: we're not sending header with access token here
+        // because we want to load all home cards regardless of the specific user
         var httpConfig =
         {
             method: "GET",
@@ -221,8 +267,6 @@ angular.module('app.controllers', [])
                 console.log(response.data.detail);
                 
                 $scope.cardList = response.data.detail;
-                
-                callback();
             }, function errorCallback(response)
             {
                 console.log("[loadCardList] fail");
@@ -237,12 +281,13 @@ angular.module('app.controllers', [])
 /// <summary> 
 /// Controller for Enertalk Sign-in page
 /// </summary>
-.controller('EnerTalkSignInCtrl', function($scope, $http, $state) 
+.controller('EnerTalkSignInCtrl', function($scope, $http, $state, TokenFactory) 
 {
-    /// Const strings for authorization query
+    // Const strings for authorization query
     var authUri = "https://enertalk-auth.encoredtech.com/login";
-        
-    var clientId = "d29vcmFteUBlbmNvcmVkdGVjaC5jb21fd29vcmFteQ==";
+
+    // TODO: fill in your client ID
+    var clientId = "";
     var clientIdParam = "?client_id=" + clientId;
     
     var redirectUri = "https://localhost/callback";
@@ -252,57 +297,96 @@ angular.module('app.controllers', [])
     var appVersionParam = "&app_version=web";
     var backUrlParam = "&back_url=/authorization";
     
-    /// Set default Content-Type for post
+    /**
+     * Set default Content-Type for post
+     */
     $http.defaults.headers.post['Content-Type'] = 'application/json';
     
-    /// Hide sign-in error message before entering sign-in page
+    /**
+     * Initialize sign-in page
+     */
     $scope.$on('$ionicView.beforeEnter', function()
     {
+        // Sign-in error message should be hidden by default
         setSignInErrorVisibility(false);
     });
-    
-    /// Handle login procedure for the app
+     
+    /**
+     * Handle login procedure for the app
+     */
     $scope.login = function()
-    {
-        // Clear sign-in error message
-        setSignInErrorVisibility(false);
+    {   
+        // Show OAuth sign-in popup
+        var loginUri = authUri + 
+            clientIdParam + 
+            redirectUriParam + 
+            responseTypeParam + 
+            appVersionParam + 
+            backUrlParam;
+ 
+        var ref = window.open(loginUri, '_blank', 'location=no');
         
-        var ref = window.open(
-            authUri + clientIdParam + redirectUriParam + responseTypeParam + appVersionParam + backUrlParam,
-            '_blank',
-            'location=no');
-        
+        // Listen for events from OAuth sign-in page
         ref.addEventListener('loadstart', function(event)
         {
             // DEBUG
             console.log("[event.url] " + event.url);
             
-            // Ignore events if its url does not start with redirect URI  
+            // Ignore events whose url does not start with redirect URI  
             if(!(event.url).startsWith(redirectUri))
             {
                 return;
             }
             
-            // Parse returned token and build post data from it
+            // Parse refresh token and get access token from it
             var authCode = (event.url).split("code=")[1];
-            
-            // Get access token from auth code and close login window
-            getAccessTokenFromAuthCode(authCode, ref.close()); 
+            getAccessTokenFromAuthCode(authCode, function(accessToken)
+            {
+                handleAccessToken(accessToken);
+                
+                // Close sign-in window
+                ref.close();
+            });
         });
     }
     
-    /// Get access token from auth code
-    var getAccessTokenFromAuthCode = function(authCode, callback)
+    /**
+     * Handle access token result such as navigation
+     * @param {String} accessToken retrieved access token 
+     */
+    var handleAccessToken = function(accessToken)
     {
-        var clientSecret = "a21a74et5dq5e27po75y3ah0q20su0ai9hw8kt2";
+        if (accessToken)
+        {
+            TokenFactory.setData(accessToken);
+
+            // Navigate to API tab on sucess
+            $state.go('tab.api');
+        }
+        else
+        {
+            // Show sign-in error message on failure
+            setSignInErrorVisibility(true);
+        }
+    }
+     
+    /**
+     * Get access token from auth code
+     * @param {String} authCode auth code to be swapped for access token
+     * @callback {handleAccessToken} cb callback method to be invoked upon completion
+     */
+    var getAccessTokenFromAuthCode = function(authCode, cb)
+    {
+        // TODO: fill in your client secret
+        var clientSecret = "";
         var grantType = "authorization_code"
         var postData = '{"client_id":"' + clientId + '",' +
             '"client_secret":"' + clientSecret + '",' +
             '"grant_type":"' + grantType + '",' +
             '"code":"' + authCode + '"}';
-                
+
         // DEBUG
-        console.log(postData);
+        console.log("[postData] " + postData);
         
         // Build config for http query
         var httpConfig =
@@ -312,34 +396,39 @@ angular.module('app.controllers', [])
             data: postData
         };
         
-        // Get access token from the query result 
+        // Get access token from post result  
         $http(httpConfig)
             .then(function sucessfullCallback(response) 
             {
-                // TODO do not use global variable
-                accessToken = response.data.access_token;
-                
                 // DEBUG
-                console.log(accessToken);
+                console.log("[Access Token]" + response.data.access_token);
                 
-                // Navigate to API tab on sucess
-                $state.go('tab.api');
+                cb(response.data.access_token);
             }, function errorCallback(response)
             {
                 // DEBUG
-                // alert("ERROR: " + response.data.statusText);
-                setSignInErrorVisibility(true);
+                console.error(
+                    "[getAccessTokenFromAuthCode] http status: " +
+                    response.data.statusText);
             });
     }
     
-    /// Show or hide sign-in error message
-    var setSignInErrorVisibility = function(isVisible)
+    /**
+     * Show or hide sign-in error message
+     * @param {Boolean} isVisible true to show sign-in error, false otherwise
+     */
+    function setSignInErrorVisibility(isVisible)
     {
         document.getElementById("sign-in-error-message").style.display =
             isVisible ? "block" : "none"; 
     }
     
-    /// NOTE: startsWith method can be removed once ECMAScript6 is implemented
+    /**
+     * String type startsWith method
+     * NOTE: this block can be removed once ECMAScript6 is implemented
+     * @param {String} searchString The characters to be searched for at the start of this string
+     * @param {Number} position Optional. The position to begin searching; defaults to 0.
+     */
     if (!String.prototype.startsWith)
     {
         String.prototype.startsWith = function(searchString, position){

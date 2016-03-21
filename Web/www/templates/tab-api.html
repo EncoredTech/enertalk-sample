@@ -4,7 +4,7 @@
     <ion-content overflow-scroll="true" padding="true" class="has-header">
         
         <ion-list>
-            <ion-item ng-repeat="api in apiList" ng-click="showApiResult(api.name)" >
+            <ion-item ng-repeat="api in apiList" ng-click="handleApiRequest(api.name)" >
                 Send {{api.name}}
                 <span class="item-text-wrap">
                     <p style="color:#a6a6a6">{{api.description}}</p>

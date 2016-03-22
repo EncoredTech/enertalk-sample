@@ -14,7 +14,7 @@ angular.module('app.routes', [])
     views: {
       'tab-api': {
         templateUrl: 'templates/tab-api.html',
-        controller: 'ApiCtrl'
+        controller: 'ApiController'
       }
     }
   })
@@ -24,7 +24,7 @@ angular.module('app.routes', [])
     views: {
       'tab-card': {
         templateUrl: 'templates/tab-card.html',
-        controller: 'CardCtrl'
+        controller: 'CardController'
       }
     }
   })
@@ -38,7 +38,7 @@ angular.module('app.routes', [])
   .state('enerTalkSignIn', {
     url: '/sign-in',
     templateUrl: 'templates/enerTalkSignIn.html',
-    controller: 'EnerTalkSignInCtrl'
+    controller: 'SignInController'
   })
   
 // Show sign-in page by default

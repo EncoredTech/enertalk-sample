@@ -1,7 +1,5 @@
-/* Services for the app */
-angular.module('app.services', [])
-
-.factory('TokenFactory', [function(){
+/* Service module for Token factory */
+serviceModule .factory('TokenFactory', [function(){
     return {
         data: {
             accessToken: '',
